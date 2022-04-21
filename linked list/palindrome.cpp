@@ -55,6 +55,24 @@ void check(node *head,node *head2){
         }
     }
     cout << "true" << endl;
+} 
+
+bool palindrome(node **left,node *right){
+    if(right==NULL){
+        return true;
+    }
+    bool isp=palindrome(left,right->next);
+    if(isp==false){
+        return false;
+    }
+    bool isp1=(right->data==(*left)->data);
+    *left=(*left)->next;
+    
+    return isp1;
+}
+
+bool ispalindrome(node *head){
+    return palindrome(&head,head);
 }
 
 int main(){
@@ -62,5 +80,6 @@ int main(){
     node *head2=copy(head);
     print(head);
     print(head2);
-    check(head,head2);
+    check(head,head2);  
+    ispalindrome(head) ? cout << "palindrome\n\n" : cout << "not palindrome\n\n" ;   
 }
