@@ -30,37 +30,28 @@ void print(node *head){
     cout << endl;
 } 
 
-void swapl(node *(&a), node *(&b)){
+void swapl(node *a, node *b){
     node *t=b;
     b=a;
     a=t;
+    return;
 }
 
 
-void swapnode(node **head,int x,int y){
-    if (x==y)
-    {
-        return; 
-    }
+void swapnode(node *head){
+    if(head==NULL && head->next==NULL ){return;}
 
-    node **a=NULL,**b=NULL;
-    while (*head!=NULL)
-    {
-        if((*head)->data==x){a=head;}
-        else if((*head)->data==y){b=head;}
-        head=&((*head)->next);
-    } 
-    if(a!=NULL && b!=NULL){
-        swapl(*a,*b);
-        swapl((*a)->next,(*b)->next);
+    node *temp=head;
+    while(head!=NULL && head->next!=NULL){
+        swap(head->data,head->next->data);
+        head=head->next->next;
     }
+    return;
 }
 
 int main(){
     node *head=takeinput();
     print(head);
-    int x,y;
-    cin >> x >> y;
-    swapnode(&head,x,y); 
+    swapnode(head); 
     print(head);
 } 
